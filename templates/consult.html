@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% block title %}Book a Consultation — Veda Ayurveda{% endblock %}
+
+{% block content %}
+<div class="page-hero" data-bg="Consult">
+  <div class="page-tag">Begin Your Journey</div>
+  <h1 class="page-title">Book a <em>Consultation</em></h1>
+  <p class="page-subtitle">Your first step toward balance. Our practitioners will guide you through a thorough assessment of your constitution and create a personalised wellness plan.</p>
+</div>
+
+{% if submitted %}
+<section style="text-align:center; padding:8rem 6rem;">
+  <div style="font-size:4rem; margin-bottom:1.5rem;">🌿</div>
+  <h2 style="font-family:'Cormorant Garamond',serif; font-size:3rem; font-weight:300; margin-bottom:1rem;">
+    Thank you for <em style="font-style:italic; color:var(--clay);">reaching out</em>
+  </h2>
+  <p style="color:#5a4030; line-height:1.8; max-width:500px; margin:0 auto 2.5rem;">
+    We have received your consultation request. One of our Ayurvedic physicians will contact you within 24 hours to confirm your appointment.
+  </p>
+  <a href="{{ url_for('home') }}" class="btn-primary">Return Home</a>
+</section>
+
+{% else %}
+<section>
+  <div style="display:grid; grid-template-columns:2fr 1fr; gap:5rem; align-items:start;">
+
+    <!-- Form -->
+    <div>
+      <div class="section-label">Your Details</div>
+      <h2 class="section-title reveal">Tell us about <em style="font-style:italic; color:var(--clay);">yourself</em></h2>
+
+      <form method="POST" action="{{ url_for('consult') }}">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="first_name">First Name</label>
+            <input type="text" id="first_name" name="first_name" placeholder="Priya" required>
+          </div>
+          <div class="form-group">
+            <label for="last_name">Last Name</label>
+            <input type="text" id="last_name" name="last_name" placeholder="Sharma" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="your@email.com" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="+1 (555) 000-0000">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="dosha">I believe my dominant dosha is</label>
+          <select id="dosha" name="dosha">
+            <option value="">— Not sure yet —</option>
+            <option value="vata">Vata (Space & Air)</option>
+            <option value="pitta">Pitta (Fire & Water)</option>
+            <option value="kapha">Kapha (Water & Earth)</option>
+            <option value="vata-pitta">Vata-Pitta</option>
+            <option value="pitta-kapha">Pitta-Kapha</option>
+            <option value="vata-kapha">Vata-Kapha</option>
+            <option value="tridoshic">Tridoshic (all three equal)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="interest">Primary area of interest</label>
+          <select id="interest" name="interest">
+            <option value="">— Select —</option>
+            <option value="general">General wellness & preventive care</option>
+            <option value="digestive">Digestive health</option>
+            <option value="stress">Stress & mental wellbeing</option>
+            <option value="sleep">Sleep & energy</option>
+            <option value="skin">Skin & beauty</option>
+            <option value="weight">Weight management</option>
+            <option value="pain">Chronic pain</option>
+            <option value="hormonal">Hormonal balance</option>
+            <option value="other">Other / Not sure</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Tell us more about your health goals</label>
+          <textarea id="message" name="message" placeholder="What brings you to Ayurveda? Any current health concerns, medications, or lifestyle factors you'd like to share..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="preferred_time">Preferred consultation time</label>
+          <select id="preferred_time" name="preferred_time">
+            <option value="">— Select —</option>
+            <option>Weekday morning (9 AM – 12 PM)</option>
+            <option>Weekday afternoon (12 PM – 5 PM)</option>
+            <option>Weekday evening (5 PM – 7 PM)</option>
+            <option>Weekend morning</option>
+            <option>Weekend afternoon</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn-primary" style="width:100%; text-align:center; font-size:.85rem;">
+          Request Consultation →
+        </button>
+      </form>
+    </div>
+
+    <!-- Sidebar info -->
+    <div class="reveal">
+      <div style="background:var(--mist); padding:2rem; margin-bottom:1.5rem;">
+        <div style="font-size:.7rem; letter-spacing:.2em; text-transform:uppercase; color:var(--clay); margin-bottom:1.2rem;">What to expect</div>
+        {% for item in [
+          ('60 min', 'Initial consultation duration'),
+          ('Pulse diagnosis', 'Nadi pariksha assessment'),
+          ('Personalised plan', 'Diet, herbs & lifestyle guidance'),
+          ('Follow-up', 'Included within 2 weeks'),
+        ] %}
+        <div style="border-bottom:1px solid rgba(139,94,60,.12); padding:.8rem 0; display:flex; justify-content:space-between; align-items:center; font-size:.88rem; color:#5a4030;">
+          <strong style="color:var(--earth);">{{ item[0] }}</strong>
+          <span>{{ item[1] }}</span>
+        </div>
+        {% endfor %}
+      </div>
+
+      <div style="background:var(--bark); color:var(--cream); padding:2rem;">
+        <div style="font-size:.7rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); margin-bottom:1rem;">Our Doshas</div>
+        <a href="{{ url_for('vata') }}" style="display:block; color:rgba(245,239,224,.6); text-decoration:none; padding:.5rem 0; border-bottom:1px solid rgba(255,255,255,.06); font-size:.88rem; transition:color .3s;" onmouseover="this.style.color='#F5EFE0'" onmouseout="this.style.color='rgba(245,239,224,.6)'">→ Vata (Space · Air)</a>
+        <a href="{{ url_for('pitta') }}" style="display:block; color:rgba(245,239,224,.6); text-decoration:none; padding:.5rem 0; border-bottom:1px solid rgba(255,255,255,.06); font-size:.88rem; transition:color .3s;" onmouseover="this.style.color='#F5EFE0'" onmouseout="this.style.color='rgba(245,239,224,.6)'">→ Pitta (Fire · Water)</a>
+        <a href="{{ url_for('kapha') }}" style="display:block; color:rgba(245,239,224,.6); text-decoration:none; padding:.5rem 0; font-size:.88rem; transition:color .3s;" onmouseover="this.style.color='#F5EFE0'" onmouseout="this.style.color='rgba(245,239,224,.6)'">→ Kapha (Water · Earth)</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endif %}
+{% endblock %}

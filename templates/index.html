@@ -1,0 +1,281 @@
+{% extends 'base.html' %}
+{% block title %}Veda — Ancient Wisdom, Modern Healing{% endblock %}
+
+{% block extra_css %}
+<style>
+.hero {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  padding-top: 80px;
+  overflow: hidden;
+}
+
+.hero-left {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 6rem 4rem 6rem 6rem;
+}
+
+.hero-tag {
+  font-size: .7rem; letter-spacing: .3em; text-transform: uppercase;
+  color: var(--clay); margin-bottom: 1.5rem;
+  display: flex; align-items: center; gap: .8rem;
+}
+.hero-tag::before { content: ''; width: 32px; height: 1px; background: var(--clay); display: block; }
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3rem, 5vw, 5.5rem); font-weight: 300; line-height: 1.08;
+  margin-bottom: 1.8rem;
+}
+.hero-title em { font-style: italic; color: var(--clay); }
+
+.hero-desc {
+  font-size: 1rem; line-height: 1.85; color: #5a4030;
+  max-width: 420px; margin-bottom: 3rem;
+}
+
+.hero-btns { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+
+.hero-right {
+  background: var(--mist); display: flex; align-items: center; justify-content: center;
+  clip-path: polygon(8% 0%, 100% 0%, 100% 100%, 0% 100%);
+  position: relative; overflow: hidden;
+}
+
+.mandala-wrap { position: relative; width: 420px; height: 420px; }
+
+.mandala-ring {
+  position: absolute; border-radius: 50%; border: 1px solid;
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+  animation: spin linear infinite;
+}
+.r1 { width: 420px; height: 420px; border-color: rgba(196,130,90,.15); animation-duration: 60s; }
+.r2 { width: 310px; height: 310px; border-color: rgba(196,130,90,.25); animation-duration: 40s; animation-direction: reverse; }
+.r3 { width: 200px; height: 200px; border-color: rgba(139,94,60,.3); animation-duration: 30s; }
+.r4 { width: 100px; height: 100px; border-color: rgba(139,94,60,.5); animation-duration: 20s; animation-direction: reverse; }
+
+.mandala-center {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  width: 56px; height: 56px; border-radius: 50%;
+  background: var(--clay); opacity: .7;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+}
+
+@keyframes spin { to { transform: translate(-50%,-50%) rotate(360deg); } }
+
+.hero-leaf {
+  position: absolute; font-size: 4rem; opacity: .15;
+  animation: floatleaf 8s ease-in-out infinite;
+}
+.hero-leaf:nth-child(1) { top: 10%; left: 8%; }
+.hero-leaf:nth-child(2) { bottom: 12%; right: 8%; animation-delay: 3s; font-size: 3rem; }
+@keyframes floatleaf {
+  0%,100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-16px) rotate(8deg); }
+}
+
+/* doshas strip */
+.dosha-strip {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  background: var(--bark);
+}
+
+.dosha-strip-item {
+  padding: 3rem 2.5rem; border-right: 1px solid rgba(255,255,255,.06);
+  text-decoration: none; color: var(--cream);
+  transition: background .3s;
+}
+.dosha-strip-item:last-child { border-right: none; }
+.dosha-strip-item:hover { background: rgba(255,255,255,.04); }
+
+.ds-symbol {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem; color: var(--gold); opacity: .6;
+  font-style: italic; margin-bottom: .8rem;
+}
+
+.ds-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem; margin-bottom: .3rem;
+}
+
+.ds-element {
+  font-size: .68rem; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 1rem;
+}
+
+.ds-desc { font-size: .88rem; line-height: 1.75; color: rgba(245,239,224,.55); }
+
+/* treatments preview */
+.treatments-preview { background: var(--cream); }
+
+/* philosophy strip */
+.phil-strip {
+  background: var(--sage); color: var(--cream);
+  padding: 5rem 6rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+}
+
+.phil-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 3.5vw, 3.8rem); font-weight: 300; font-style: italic;
+  line-height: 1.2; border-left: 3px solid rgba(245,239,224,.5); padding-left: 2rem;
+}
+
+.phil-text p { font-size: .95rem; line-height: 1.9; color: rgba(245,239,224,.8); margin-bottom: 1.2rem; }
+
+/* cta */
+.home-cta {
+  background: var(--earth); color: var(--cream);
+  text-align: center; padding: 7rem 6rem;
+  position: relative; overflow: hidden;
+}
+.home-cta::before {
+  content: ''; position: absolute;
+  width: 500px; height: 500px; border-radius: 50%;
+  border: 1px solid rgba(245,239,224,.08);
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+}
+.home-cta::after {
+  content: ''; position: absolute;
+  width: 300px; height: 300px; border-radius: 50%;
+  border: 1px solid rgba(245,239,224,.08);
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+}
+.cta-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.2rem, 4vw, 3.8rem); font-weight: 300;
+  margin: 1rem 0; position: relative; z-index: 2;
+}
+.cta-sub {
+  font-size: .95rem; line-height: 1.8; color: rgba(245,239,224,.7);
+  max-width: 460px; margin: 0 auto 2.5rem; position: relative; z-index: 2;
+}
+.home-cta .btn-primary {
+  background: var(--cream); color: var(--earth);
+  position: relative; z-index: 2;
+}
+.home-cta .btn-primary:hover { background: var(--gold); color: var(--bark); }
+
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-right { display: none; }
+  .hero-left { padding: 4rem 1.5rem; }
+  .dosha-strip { grid-template-columns: 1fr; }
+  .dosha-strip-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,.06); }
+  .phil-strip { grid-template-columns: 1fr; gap: 2rem; padding: 4rem 1.5rem; }
+  .home-cta { padding: 5rem 1.5rem; }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Est. 5000 BCE · Rooted in Vedic Wisdom</div>
+    <h1 class="hero-title">
+      Heal from<br>
+      <em>within,</em><br>
+      live in balance
+    </h1>
+    <p class="hero-desc">
+      Ayurveda is not merely a system of medicine — it is a science of life. Discover your unique constitution and realign with the rhythms of nature.
+    </p>
+    <div class="hero-btns">
+      <a href="{{ url_for('consult') }}" class="btn-primary">Find Your Dosha</a>
+      <a href="{{ url_for('philosophy') }}" class="btn-ghost">Learn More</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <span class="hero-leaf">🌿</span>
+    <span class="hero-leaf">🍃</span>
+    <div class="mandala-wrap">
+      <div class="mandala-ring r1"></div>
+      <div class="mandala-ring r2"></div>
+      <div class="mandala-ring r3"></div>
+      <div class="mandala-ring r4"></div>
+      <div class="mandala-center">ॐ</div>
+    </div>
+  </div>
+</section>
+
+<!-- Dosha Strip -->
+<div class="dosha-strip">
+  <a href="{{ url_for('vata') }}" class="dosha-strip-item reveal">
+    <div class="ds-symbol">वात</div>
+    <div class="ds-name">Vata</div>
+    <div class="ds-element">Space · Air</div>
+    <p class="ds-desc">The energy of movement. Creative, quick, and light when balanced.</p>
+  </a>
+  <a href="{{ url_for('pitta') }}" class="dosha-strip-item reveal">
+    <div class="ds-symbol">पित्त</div>
+    <div class="ds-name">Pitta</div>
+    <div class="ds-element">Fire · Water</div>
+    <p class="ds-desc">The energy of transformation. Sharp, focused, and passionate when balanced.</p>
+  </a>
+  <a href="{{ url_for('kapha') }}" class="dosha-strip-item reveal">
+    <div class="ds-symbol">कफ</div>
+    <div class="ds-name">Kapha</div>
+    <div class="ds-element">Water · Earth</div>
+    <p class="ds-desc">The energy of structure. Calm, compassionate, and grounded when balanced.</p>
+  </a>
+</div>
+
+<!-- Treatments Preview -->
+<section class="treatments-preview">
+  <div class="section-label">Healing Arts</div>
+  <h2 class="section-title reveal">Ancient therapies,<br>profound results</h2>
+  <div class="card-grid-2">
+    <a href="{{ url_for('treatment_detail', slug='abhyanga') }}" class="card reveal">
+      <div class="card-icon">🫙</div>
+      <div class="card-name">Abhyanga</div>
+      <div class="card-sub">60 – 90 minutes</div>
+      <p class="card-desc">Full-body warm oil massage to nourish tissues and calm the nervous system.</p>
+      <div class="card-link">Learn more →</div>
+    </a>
+    <a href="{{ url_for('treatment_detail', slug='shirodhara') }}" class="card reveal">
+      <div class="card-icon">🌊</div>
+      <div class="card-name">Shirodhara</div>
+      <div class="card-sub">45 – 60 minutes</div>
+      <p class="card-desc">A steady oil stream over the third eye inducing profound mental calm.</p>
+      <div class="card-link">Learn more →</div>
+    </a>
+    <a href="{{ url_for('treatment_detail', slug='panchakarma') }}" class="card reveal">
+      <div class="card-icon">🌿</div>
+      <div class="card-name">Panchakarma</div>
+      <div class="card-sub">7 – 21 day programme</div>
+      <p class="card-desc">The ultimate Ayurvedic detox — a complete reset for body, mind, and spirit.</p>
+      <div class="card-link">Learn more →</div>
+    </a>
+    <a href="{{ url_for('treatments') }}" class="card reveal" style="background: var(--bark); color: var(--cream); border-color: var(--gold); display:flex; align-items:center; justify-content:center; text-align:center;">
+      <div>
+        <div style="font-family:'Cormorant Garamond',serif; font-size:2rem; margin-bottom:1rem;">View All<br>Treatments</div>
+        <div style="font-size:.75rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold);">→</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- Philosophy Strip -->
+<div class="phil-strip">
+  <blockquote class="phil-quote reveal">
+    "The body is the<br>temple of the soul."
+  </blockquote>
+  <div class="phil-text reveal">
+    <p>Ayurveda — literally "the science of life" — is a 5,000-year-old system of natural healing rooted in the Vedic culture of India. It is the world's oldest continually practised healthcare system.</p>
+    <p>Rather than focusing on disease, Ayurveda cultivates health, vitality, and longevity. Every person is a unique expression of nature's intelligence.</p>
+    <a href="{{ url_for('philosophy') }}" class="btn-ghost" style="color: var(--cream); border-color: rgba(245,239,224,.5);">Read our philosophy →</a>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="home-cta">
+  <div class="section-label" style="justify-content:center; color:var(--gold);">Begin Your Journey</div>
+  <h2 class="cta-title reveal">Ready to find your <em style="font-style:italic">balance?</em></h2>
+  <p class="cta-sub reveal">Book a personalised consultation with one of our Ayurvedic physicians and receive a tailored programme just for you.</p>
+  <a href="{{ url_for('consult') }}" class="btn-primary reveal">Book a Consultation</a>
+</div>
+{% endblock %}

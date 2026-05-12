@@ -1,0 +1,44 @@
+{% extends 'admin/base.html' %}
+{% block title %}All Bookings — Veda Admin{% endblock %}
+{% block content %}
+<div class="topbar"><h1 class="ph">All <em>Bookings</em></h1></div>
+
+<div class="filters">
+  <a href="{{ url_for('admin_bookings') }}" class="fb {% if not status_filter %}active{% endif %}">All</a>
+  <a href="{{ url_for('admin_bookings') }}?status=new"       class="fb {% if status_filter=='new' %}active{% endif %}">🆕 New</a>
+  <a href="{{ url_for('admin_bookings') }}?status=confirmed"  class="fb {% if status_filter=='confirmed' %}active{% endif %}">✅ Confirmed</a>
+  <a href="{{ url_for('admin_bookings') }}?status=completed"  class="fb {% if status_filter=='completed' %}active{% endif %}">🏁 Completed</a>
+  <a href="{{ url_for('admin_bookings') }}?status=cancelled"  class="fb {% if status_filter=='cancelled' %}active{% endif %}">❌ Cancelled</a>
+  <form class="sf" method="GET" action="{{ url_for('admin_bookings') }}">
+    {% if status_filter %}<input type="hidden" name="status" value="{{ status_filter }}">{% endif %}
+    <input type="text" name="search" class="sb" placeholder="Search name or email…" value="{{ search }}">
+    <button type="submit" class="sbtn">Go</button>
+  </form>
+</div>
+
+<div class="tw">
+  <div class="th"><div class="tt">{{ bookings|length }} booking{{ 's' if bookings|length != 1 }}</div></div>
+  {% if bookings %}
+  <table>
+    <thead><tr><th>#</th><th>Name</th><th>Email</th><th>Phone</th><th>Dosha</th><th>Interest</th><th>Time Pref.</th><th>Status</th><th>Date</th></tr></thead>
+    <tbody>
+      {% for b in bookings %}
+      <tr>
+        <td style="color:#bbb;font-size:.78rem">#{{ b.id }}</td>
+        <td><a href="{{ url_for('admin_booking_detail', booking_id=b.id) }}" class="tl"><strong>{{ b.first_name }} {{ b.last_name }}</strong></a></td>
+        <td><a href="mailto:{{ b.email }}" class="tl" style="color:#999">{{ b.email }}</a></td>
+        <td style="color:#999">{{ b.phone or '—' }}</td>
+        <td>{{ b.dosha or '—' }}</td>
+        <td style="font-size:.82rem">{{ b.interest or '—' }}</td>
+        <td style="font-size:.8rem;color:#aaa">{{ b.preferred_time or '—' }}</td>
+        <td><span class="badge badge-{{ b.status }}">{{ b.status }}</span></td>
+        <td style="color:#bbb;font-size:.8rem">{{ b.created_at[:10] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <div class="empty">No bookings found{% if search %} matching "{{ search }}"{% endif %}{% if status_filter %} with status "{{ status_filter }}"{% endif %}.</div>
+  {% endif %}
+</div>
+{% endblock %}

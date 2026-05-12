@@ -1,0 +1,65 @@
+{% extends 'admin/base.html' %}
+{% block title %}Booking #{{ booking.id }} — Veda Admin{% endblock %}
+{% block content %}
+<a href="{{ url_for('admin_bookings') }}" class="back">← Back to all bookings</a>
+
+<div class="topbar">
+  <h1 class="ph"><em>{{ booking.first_name }} {{ booking.last_name }}</em></h1>
+  <span class="badge badge-{{ booking.status }}" style="font-size:.8rem;padding:.35rem .9rem">{{ booking.status }}</span>
+</div>
+
+<div class="dg">
+  <!-- Left: details -->
+  <div>
+    <div class="dc">
+      <h3>Contact Information</h3>
+      <div class="dr"><div class="dk">Full Name</div><div class="dv"><strong>{{ booking.first_name }} {{ booking.last_name }}</strong></div></div>
+      <div class="dr"><div class="dk">Email</div><div class="dv"><a href="mailto:{{ booking.email }}" style="color:var(--clay)">{{ booking.email }}</a></div></div>
+      <div class="dr"><div class="dk">Phone</div><div class="dv">{{ booking.phone or '—' }}</div></div>
+      <div class="dr"><div class="dk">Booked On</div><div class="dv">{{ booking.created_at }}</div></div>
+    </div>
+    <div class="dc">
+      <h3>Consultation Details</h3>
+      <div class="dr"><div class="dk">Dosha</div><div class="dv">{{ booking.dosha or '— Not specified' }}</div></div>
+      <div class="dr"><div class="dk">Interest</div><div class="dv">{{ booking.interest or '— Not specified' }}</div></div>
+      <div class="dr"><div class="dk">Preferred Time</div><div class="dv">{{ booking.preferred_time or '— Not specified' }}</div></div>
+      {% if booking.message %}
+      <div class="dr" style="flex-direction:column">
+        <div class="dk">Message / Notes</div>
+        <div class="mb">{{ booking.message }}</div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Right: actions -->
+  <div>
+    <div class="dc">
+      <h3>Update Status</h3>
+      <p style="font-size:.83rem;color:#aaa;margin-bottom:1.1rem">Current: <span class="badge badge-{{ booking.status }}">{{ booking.status }}</span></p>
+      <form method="POST" action="{{ url_for('admin_update_status', booking_id=booking.id) }}">
+        <div class="stf">
+          <button type="submit" name="status" value="new"       class="stb bn">🆕 New</button>
+          <button type="submit" name="status" value="confirmed"  class="stb bc">✅ Confirm</button>
+          <button type="submit" name="status" value="completed"  class="stb bd">🏁 Complete</button>
+          <button type="submit" name="status" value="cancelled"  class="stb bx">❌ Cancel</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="dc">
+      <h3>Quick Actions</h3>
+      <a href="mailto:{{ booking.email }}?subject=Your Veda Consultation Request" class="qa">✉️ Email Client</a>
+      {% if booking.phone %}<a href="tel:{{ booking.phone }}" class="qa">📞 Call Client</a>{% endif %}
+    </div>
+
+    <div class="dc" style="border-top:2px solid #f0d0d0">
+      <h3 style="color:#c4635a">Danger Zone</h3>
+      <form method="POST" action="{{ url_for('admin_delete_booking', booking_id=booking.id) }}"
+            onsubmit="return confirm('Delete this booking permanently? This cannot be undone.')">
+        <button type="submit" class="dbtn">🗑 Delete This Booking</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

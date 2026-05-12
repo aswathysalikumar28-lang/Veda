@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}{{ t.name }} — Veda Ayurveda{% endblock %}
+
+{% block content %}
+<div class="page-hero" data-bg="{{ t.name }}">
+  <div class="page-tag">{{ t.tagline }}</div>
+  <h1 class="page-title"><em>{{ t.name }}</em></h1>
+  <p class="page-subtitle">{{ t.duration }} &nbsp;·&nbsp; {{ t.price }}</p>
+</div>
+
+<section>
+  <div style="display:grid; grid-template-columns:2fr 1fr; gap:5rem; align-items:start;">
+    <div>
+      <div class="section-label">About This Treatment</div>
+      <p style="font-size:1.1rem; line-height:1.9; color:#5a4030; margin-bottom:2rem;">{{ t.desc }}</p>
+
+      <div class="section-label" style="margin-top:2.5rem;">Benefits</div>
+      <ul style="list-style:none; margin-top:1rem;">
+        {% for b in t.benefits %}
+        <li style="padding:.65rem 0; border-bottom:1px solid rgba(139,94,60,.1); font-size:.9rem; color:#5a4030; display:flex; gap:.8rem; align-items:center;">
+          <span style="color:var(--clay); font-size:.8rem;">◆</span> {{ b }}
+        </li>
+        {% endfor %}
+      </ul>
+
+      <div class="section-label" style="margin-top:2.5rem;">The Process</div>
+      <ol style="list-style:none; margin-top:1rem; counter-reset:step;">
+        {% for p in t.process %}
+        <li style="padding:.65rem 0; border-bottom:1px solid rgba(139,94,60,.1); font-size:.9rem; color:#5a4030; display:flex; gap:1rem; align-items:center; counter-increment:step;">
+          <span style="font-family:'Cormorant Garamond',serif; font-size:1.4rem; color:var(--clay); min-width:1.5rem; opacity:.6;">{{ loop.index }}</span>
+          {{ p }}
+        </li>
+        {% endfor %}
+      </ol>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="reveal">
+      <div style="background:var(--mist); padding:2rem; margin-bottom:1.5rem;">
+        <div style="font-size:.7rem; letter-spacing:.2em; text-transform:uppercase; color:var(--clay); margin-bottom:1rem;">Treatment Info</div>
+        <div style="border-bottom:1px solid rgba(139,94,60,.15); padding:.8rem 0; font-size:.9rem; color:#5a4030;"><strong style="color:var(--earth);">Duration:</strong> {{ t.duration }}</div>
+        <div style="border-bottom:1px solid rgba(139,94,60,.15); padding:.8rem 0; font-size:.9rem; color:#5a4030;"><strong style="color:var(--earth);">Price:</strong> {{ t.price }}</div>
+        <div style="padding:.8rem 0; font-size:.9rem; color:#5a4030;"><strong style="color:var(--earth);">Ideal for:</strong><br><span style="font-style:italic;">{{ t.ideal_for }}</span></div>
+      </div>
+
+      <a href="{{ url_for('consult') }}" class="btn-primary" style="width:100%; text-align:center; display:block;">Book This Treatment</a>
+    </div>
+  </div>
+</section>
+
+<section style="padding:3rem 6rem; background:var(--mist); display:flex; gap:2rem; align-items:center; flex-wrap:wrap;">
+  <a href="{{ url_for('treatments') }}" class="btn-ghost">← All Treatments</a>
+  <a href="{{ url_for('consult') }}" class="btn-primary">Book a Consultation</a>
+</section>
+{% endblock %}

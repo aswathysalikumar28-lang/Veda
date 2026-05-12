@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block title %}Our Philosophy — Veda Ayurveda{% endblock %}
+
+{% block content %}
+<div class="page-hero" data-bg="Veda">
+  <div class="page-tag">5,000 Years of Wisdom</div>
+  <h1 class="page-title">Our <em>Philosophy</em></h1>
+  <p class="page-subtitle">Ayurveda is not a set of rules — it is a living conversation between the individual and the cosmos, practised moment by moment.</p>
+</div>
+
+<!-- What is Ayurveda -->
+<section>
+  <div style="display:grid; grid-template-columns:1fr 2fr; gap:6rem; align-items:start;">
+    <div class="reveal">
+      <div style="font-family:'Cormorant Garamond',serif; font-size:5rem; color:var(--clay); opacity:.2; line-height:1;">आयुर्वेद</div>
+      <div style="margin-top:-2rem;">
+        <div class="section-label">The Meaning</div>
+        <h2 style="font-family:'Cormorant Garamond',serif; font-size:2.5rem; font-weight:300; line-height:1.2; margin-bottom:1rem;">
+          <em style="font-style:italic;">Ayur</em> + <em style="font-style:italic;">Veda</em>
+        </h2>
+        <p style="font-size:.9rem; line-height:1.8; color:#5a4030;">
+          Life + Knowledge.<br>The science of living well.
+        </p>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div class="section-label">Our Foundation</div>
+      <h2 class="section-title" style="margin-bottom:1.5rem;">The science of <em style="font-style:italic; color:var(--clay);">life itself</em></h2>
+      <p style="line-height:1.9; color:#5a4030; margin-bottom:1.5rem; font-size:1rem;">
+        Ayurveda emerged from the Vedic civilisation of ancient India over 5,000 years ago. It is the world's oldest continuously practised healthcare system, predating Greek medicine and traditional Chinese medicine.
+      </p>
+      <p style="line-height:1.9; color:#5a4030; margin-bottom:1.5rem; font-size:1rem;">
+        The Charaka Samhita and Sushruta Samhita — the two foundational classical texts — describe a complete system of medicine covering everything from surgical techniques to psychosomatic disease, dietetics, and the cultivation of consciousness.
+      </p>
+      <p style="line-height:1.9; color:#5a4030; font-size:1rem;">
+        At its heart, Ayurveda teaches that health is not the absence of disease but a state of dynamic balance — between body, mind, spirit, and environment.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Core Principles -->
+<section style="background:var(--bark); color:var(--cream);">
+  <div class="section-label" style="color:var(--gold);">Core Tenets</div>
+  <h2 class="section-title" style="color:var(--cream);">The pillars of <em style="font-style:italic; color:var(--gold);">Ayurvedic living</em></h2>
+
+  <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem;">
+    {% for pillar in [
+      ('Prakriti', 'Your Constitution', 'Every person is born with a unique combination of doshas — your prakriti. This is your baseline nature and the foundation of all personalised Ayurvedic care.', '०१'),
+      ('Agni', 'Digestive Fire', 'Agni is the central force of transformation in the body. Strong agni means good digestion, clear mind, and radiant health. Weak agni is the root of most disease.', '०२'),
+      ('Ama', 'Metabolic Toxins', 'Ama is the residue of incomplete digestion — physical and emotional. Clearing ama through proper diet, herbs, and Panchakarma is central to Ayurvedic healing.', '०३'),
+      ('Ojas', 'Vital Essence', 'Ojas is the refined essence of all body tissues — the force behind immunity, radiance, and spiritual clarity. Ayurveda is fundamentally the science of building ojas.', '०४'),
+      ('Dinacharya', 'Daily Rhythm', 'Aligning your daily routine with the rhythms of nature — waking with the sun, eating at noon, sleeping early — is one of Ayurveda\'s most powerful preventive tools.', '०५'),
+      ('Ritucharya', 'Seasonal Rhythm', 'Just as individual constitutions vary, the seasons carry different qualities. Adjusting diet and lifestyle with each season maintains balance throughout the year.', '०६')
+    ] %}
+    <div class="card reveal" style="background:rgba(255,255,255,.04); border-color:rgba(212,168,71,.2);">
+      <div style="font-family:'Cormorant Garamond',serif; font-size:2rem; color:var(--gold); opacity:.4; margin-bottom:.5rem;">{{ pillar[3] }}</div>
+      <div class="card-name" style="color:var(--cream);">{{ pillar[0] }}</div>
+      <div class="card-sub" style="color:var(--gold);">{{ pillar[1] }}</div>
+      <p class="card-desc" style="color:rgba(245,239,224,.6);">{{ pillar[2] }}</p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Quote -->
+<section style="background:var(--sage); color:var(--cream); text-align:center; padding:6rem;">
+  <div style="max-width:800px; margin:0 auto;">
+    <div style="font-size:3rem; opacity:.3; margin-bottom:1rem; font-family:'Cormorant Garamond',serif;">"</div>
+    <blockquote class="reveal" style="font-family:'Cormorant Garamond',serif; font-size:clamp(1.8rem,3vw,3rem); font-weight:300; font-style:italic; line-height:1.3; margin-bottom:1.5rem;">
+      When diet is wrong, medicine is of no use.<br>When diet is correct, medicine is of no need.
+    </blockquote>
+    <cite class="reveal" style="font-size:.8rem; letter-spacing:.2em; text-transform:uppercase; color:rgba(245,239,224,.6);">— Ayurvedic proverb</cite>
+  </div>
+</section>
+
+<!-- Our approach -->
+<section>
+  <div class="section-label">How We Work</div>
+  <h2 class="section-title reveal">Ancient wisdom,<br><em style="font-style:italic; color:var(--clay);">modern practice</em></h2>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:4rem;">
+    <p class="reveal" style="line-height:1.9; color:#5a4030; font-size:1rem;">
+      At Veda, we honour the classical tradition while making it accessible and relevant to contemporary life. Our physicians have trained in both Ayurveda and modern medicine, allowing them to work alongside your existing healthcare.
+    </p>
+    <p class="reveal" style="line-height:1.9; color:#5a4030; font-size:1rem;">
+      We believe Ayurveda is not alternative medicine — it is complementary, preventive, and profoundly effective for those willing to participate in their own healing. We are guides; you are the healer.
+    </p>
+  </div>
+  <div style="margin-top:3rem;" class="reveal">
+    <a href="{{ url_for('consult') }}" class="btn-primary">Begin Your Journey</a>
+  </div>
+</section>
+{% endblock %}

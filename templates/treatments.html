@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}Ayurvedic Treatments — Veda{% endblock %}
+
+{% block content %}
+<div class="page-hero" data-bg="Heal">
+  <div class="page-tag">Healing Arts</div>
+  <h1 class="page-title">Our <em>Treatments</em></h1>
+  <p class="page-subtitle">Each therapy is personalised to your unique constitution, season, and state of imbalance — combining timeless methods with mindful care.</p>
+</div>
+
+<section>
+  <div class="section-label">All Therapies</div>
+  <h2 class="section-title reveal">Choose your <em style="font-style:italic; color:var(--clay);">path to balance</em></h2>
+
+  <div class="card-grid-2">
+    {% for t in treatments %}
+    <a href="{{ url_for('treatment_detail', slug=t.slug) }}" class="card reveal">
+      <div class="card-icon">{{ t.icon }}</div>
+      <div class="card-name">{{ t.name }}</div>
+      <div class="card-sub">{{ t.duration }}</div>
+      <p class="card-desc">{{ t.desc }}</p>
+      <div class="card-link">Learn more →</div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section style="background:var(--mist);">
+  <div class="section-label">Our Approach</div>
+  <h2 class="section-title reveal">What to <em style="font-style:italic; color:var(--clay);">expect</em></h2>
+  <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:2rem;">
+    <div class="reveal" style="text-align:center; padding:2rem;">
+      <div style="font-size:2.5rem; margin-bottom:1rem;">🩺</div>
+      <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.4rem; margin-bottom:.8rem;">Initial Consultation</h3>
+      <p style="font-size:.88rem; line-height:1.8; color:#5a4030;">A thorough assessment of your prakriti, vikruti, and current health goals with our Ayurvedic physician.</p>
+    </div>
+    <div class="reveal" style="text-align:center; padding:2rem;">
+      <div style="font-size:2.5rem; margin-bottom:1rem;">🌿</div>
+      <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.4rem; margin-bottom:.8rem;">Personalised Plan</h3>
+      <p style="font-size:.88rem; line-height:1.8; color:#5a4030;">A customised treatment programme designed around your unique constitution, lifestyle, and health needs.</p>
+    </div>
+    <div class="reveal" style="text-align:center; padding:2rem;">
+      <div style="font-size:2.5rem; margin-bottom:1rem;">✨</div>
+      <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.4rem; margin-bottom:.8rem;">Ongoing Support</h3>
+      <p style="font-size:.88rem; line-height:1.8; color:#5a4030;">Follow-up sessions and home practice guidance to sustain your results and deepen your healing journey.</p>
+    </div>
+  </div>
+</section>
+{% endblock %}

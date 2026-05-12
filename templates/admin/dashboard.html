@@ -1,0 +1,41 @@
+{% extends 'admin/base.html' %}
+{% block title %}Dashboard — Veda Admin{% endblock %}
+{% block content %}
+<div class="topbar">
+  <h1 class="ph">Good day, <em>Admin</em> 🌿</h1>
+</div>
+
+<div class="stats">
+  <div class="sc"><div class="sn-num">{{ total }}</div><div class="sn-label">Total Bookings</div></div>
+  <div class="sc sn"><div class="sn-num" style="color:#b06830">{{ new_count }}</div><div class="sn-label">New / Pending</div></div>
+  <div class="sc sf"><div class="sn-num" style="color:var(--sage)">{{ confirmed }}</div><div class="sn-label">Confirmed</div></div>
+  <div class="sc sd"><div class="sn-num" style="color:#3a7a3a">{{ completed }}</div><div class="sn-label">Completed</div></div>
+</div>
+
+<div class="tw">
+  <div class="th">
+    <div class="tt">Recent Bookings</div>
+    <a href="{{ url_for('admin_bookings') }}" style="font-size:.73rem;color:var(--clay);text-decoration:none;">View all →</a>
+  </div>
+  {% if recent %}
+  <table>
+    <thead><tr><th>#</th><th>Name</th><th>Email</th><th>Dosha</th><th>Interest</th><th>Status</th><th>Date</th></tr></thead>
+    <tbody>
+      {% for b in recent %}
+      <tr>
+        <td style="color:#bbb;font-size:.78rem">#{{ b.id }}</td>
+        <td><a href="{{ url_for('admin_booking_detail', booking_id=b.id) }}" class="tl"><strong>{{ b.first_name }} {{ b.last_name }}</strong></a></td>
+        <td style="color:#999">{{ b.email }}</td>
+        <td>{{ b.dosha or '—' }}</td>
+        <td>{{ b.interest or '—' }}</td>
+        <td><span class="badge badge-{{ b.status }}">{{ b.status }}</span></td>
+        <td style="color:#bbb;font-size:.8rem">{{ b.created_at[:10] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <div class="empty">No bookings yet. They'll appear here once users submit the consultation form.</div>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login — Veda</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--clay:#C4825A;--earth:#8B5E3C;--cream:#F5EFE0;--bark:#2E1F0F;--gold:#D4A847;--mist:#EDE4D3}
+body{background:var(--bark);font-family:'Jost',sans-serif;font-weight:300;min-height:100vh;display:flex;align-items:center;justify-content:center}
+.box{background:var(--cream);padding:3rem;width:100%;max-width:400px}
+.logo{font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--earth);margin-bottom:.2rem}
+.logo span{color:var(--clay);font-style:italic}
+.sub{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--clay);margin-bottom:2.5rem}
+.fg{margin-bottom:1.2rem}
+.fg label{display:block;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--earth);margin-bottom:.4rem}
+.fg input{width:100%;padding:.85rem 1rem;background:var(--mist);border:1px solid rgba(139,94,60,.2);font-family:'Jost',sans-serif;font-size:.95rem;color:var(--bark);outline:none;transition:border-color .3s}
+.fg input:focus{border-color:var(--clay)}
+.btn{width:100%;background:var(--earth);color:var(--cream);padding:.9rem;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;transition:background .3s;margin-top:.5rem}
+.btn:hover{background:var(--bark)}
+.err{background:#fee2e2;border-left:3px solid #ef4444;padding:.75rem 1rem;margin-bottom:1.4rem;font-size:.85rem;color:#b91c1c}
+.hint{margin-top:1.5rem;font-size:.75rem;color:rgba(46,31,15,.35);text-align:center;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="box">
+  <div class="logo">Ve<span>da</span></div>
+  <div class="sub">Admin Panel</div>
+  {% if error %}<div class="err">{{ error }}</div>{% endif %}
+  <form method="POST">
+    <div class="fg"><label>Username</label><input type="text" name="username" placeholder="admin" required autofocus></div>
+    <div class="fg"><label>Password</label><input type="password" name="password" placeholder="••••••••" required></div>
+    <button type="submit" class="btn">Sign In →</button>
+  </form>
+  <p class="hint">Default credentials: admin / veda123<br>Change in app.py after first login</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% block title %}{{ dosha.name }} Dosha — Veda Ayurveda{% endblock %}
+
+{% block content %}
+<div class="page-hero" data-bg="{{ dosha.name }}" style="background: var(--bark);">
+  <div class="page-tag">{{ dosha.elements }}</div>
+  <h1 class="page-title">
+    <span style="font-size:0.5em; color:var(--gold); display:block; margin-bottom:.5rem;">{{ dosha.sanskrit }}</span>
+    <em>{{ dosha.name }}</em> Dosha
+  </h1>
+  <p class="page-subtitle">{{ dosha.desc }}</p>
+</div>
+
+<!-- Qualities & Traits -->
+<section>
+  <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:2rem; margin-bottom:4rem;">
+    <div class="reveal">
+      <div class="section-label">Qualities</div>
+      <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.8rem; margin-bottom:1.5rem;">Gunas</h3>
+      <div style="display:flex; flex-wrap:wrap; gap:.5rem;">
+        {% for q in dosha.qualities %}
+        <span class="tag">{{ q }}</span>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div class="section-label" style="color:var(--sage);">When Balanced</div>
+      <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.8rem; margin-bottom:1.5rem; color:var(--sage);">Harmony</h3>
+      <ul style="list-style:none;">
+        {% for b in dosha.balanced %}
+        <li style="padding:.4rem 0; border-bottom:1px solid rgba(122,140,110,.2); font-size:.9rem; color:#5a4030;">✓ {{ b }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="reveal">
+      <div class="section-label" style="color:var(--clay);">When Imbalanced</div>
+      <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.8rem; margin-bottom:1.5rem; color:var(--clay);">Excess</h3>
+      <ul style="list-style:none;">
+        {% for i in dosha.imbalanced %}
+        <li style="padding:.4rem 0; border-bottom:1px solid rgba(196,130,90,.2); font-size:.9rem; color:#5a4030;">⚠ {{ i }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <!-- Season & Time -->
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-bottom:4rem;">
+    <div class="card reveal" style="background:var(--mist);">
+      <div class="card-icon">🌙</div>
+      <div class="card-sub">Predominant Season</div>
+      <div class="card-name">{{ dosha.season }}</div>
+    </div>
+    <div class="card reveal" style="background:var(--mist);">
+      <div class="card-icon">⏰</div>
+      <div class="card-sub">Time of Day</div>
+      <div class="card-name">{{ dosha.time }}</div>
+    </div>
+  </div>
+</section>
+
+<!-- Diet -->
+<section style="background:var(--mist);">
+  <div class="section-label">Dietary Guidance</div>
+  <h2 class="section-title reveal">Nourishing <em style="font-style:italic; color:var(--clay);">{{ dosha.name }}</em></h2>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:3rem;">
+    <div class="reveal">
+      <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.5rem; margin-bottom:1.5rem; color:var(--sage);">🌿 Favour These</h3>
+      <ul style="list-style:none;">
+        {% for f in dosha.foods %}
+        <li style="padding:.6rem 0; border-bottom:1px solid rgba(122,140,110,.15); font-size:.9rem; color:#5a4030;">{{ f }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="reveal">
+      <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.5rem; margin-bottom:1.5rem; color:var(--clay);">⚡ Reduce These</h3>
+      <ul style="list-style:none;">
+        {% for a in dosha.avoid %}
+        <li style="padding:.6rem 0; border-bottom:1px solid rgba(196,130,90,.15); font-size:.9rem; color:#5a4030;">{{ a }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Herbs -->
+<section style="background:var(--bark); color:var(--cream);">
+  <div class="section-label" style="color:var(--gold);">Herbal Allies</div>
+  <h2 class="section-title" style="color:var(--cream);">Herbs for <em style="font-style:italic; color:var(--gold);">{{ dosha.name }}</em></h2>
+  <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+    {% for herb in dosha.herbs %}
+    <a href="{{ url_for('herbs') }}" style="text-decoration:none;">
+      <span class="tag tag-dark" style="font-size:.78rem; padding:.5rem 1.2rem;">🌿 {{ herb }}</span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Back nav -->
+<section style="padding:3rem 6rem; background:var(--cream); display:flex; gap:2rem; align-items:center;">
+  <a href="{{ url_for('doshas') }}" class="btn-ghost">← All Doshas</a>
+  <a href="{{ url_for('consult') }}" class="btn-primary">Book Consultation</a>
+</section>
+{% endblock %}

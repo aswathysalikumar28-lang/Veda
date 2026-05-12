@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}Veda — Ancient Wisdom, Modern Healing{% endblock %}</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+{% block extra_css %}{% endblock %}
+</head>
+<body>
+
+<nav>
+  <a href="{{ url_for('home') }}" class="logo">Ve<span>da</span></a>
+  <button class="nav-toggle" onclick="toggleNav()">☰</button>
+  <ul id="nav-menu">
+    <li><a href="{{ url_for('doshas') }}" {% if request.endpoint in ['doshas','vata','pitta','kapha'] %}class="active"{% endif %}>Doshas</a></li>
+    <li><a href="{{ url_for('treatments') }}" {% if request.endpoint in ['treatments','treatment_detail'] %}class="active"{% endif %}>Treatments</a></li>
+    <li><a href="{{ url_for('philosophy') }}" {% if request.endpoint == 'philosophy' %}class="active"{% endif %}>Philosophy</a></li>
+    <li><a href="{{ url_for('herbs') }}" {% if request.endpoint == 'herbs' %}class="active"{% endif %}>Herbs</a></li>
+    <li><a href="{{ url_for('consult') }}" class="nav-cta">Consult</a></li>
+  </ul>
+</nav>
+
+<main>
+{% block content %}{% endblock %}
+</main>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="logo">Ve<span>da</span></div>
+      <p class="footer-tagline">Rooted in 5,000 years of wisdom.<br>Practised with modern understanding.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="{{ url_for('doshas') }}">The Doshas</a></li>
+        <li><a href="{{ url_for('treatments') }}">Treatments</a></li>
+        <li><a href="{{ url_for('herbs') }}">Herbs & Botanicals</a></li>
+        <li><a href="{{ url_for('philosophy') }}">Philosophy</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Doshas</h4>
+      <ul>
+        <li><a href="{{ url_for('vata') }}">Vata</a></li>
+        <li><a href="{{ url_for('pitta') }}">Pitta</a></li>
+        <li><a href="{{ url_for('kapha') }}">Kapha</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:hello@veda.com">hello@veda.com</a></li>
+        <li><a href="{{ url_for('consult') }}">Book a Consultation</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Veda Ayurveda. All rights reserved.</p>
+    <p>Crafted with 🌿 and intention</p>
+  </div>
+</footer>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

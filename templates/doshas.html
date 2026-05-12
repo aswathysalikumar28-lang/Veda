@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block title %}The Three Doshas — Veda Ayurveda{% endblock %}
+
+{% block content %}
+<div class="page-hero" data-bg="Tridosha">
+  <div class="page-tag">The Three Energies</div>
+  <h1 class="page-title">The <em>Tridosha</em> System</h1>
+  <p class="page-subtitle">Ayurveda teaches that every person is made of five elements — space, air, fire, water, and earth — combined into three life forces called doshas.</p>
+</div>
+
+<section style="background: var(--bark); color: var(--cream);">
+  <div class="section-label" style="color:var(--gold);">Understanding Your Nature</div>
+  <h2 class="section-title" style="color:var(--cream);">Your unique <em style="font-style:italic; color:var(--gold);">Prakriti</em></h2>
+  <p style="max-width:680px; line-height:1.9; color:rgba(245,239,224,.7); margin-bottom:3rem; font-size:.95rem;">
+    Prakriti is the unique combination of doshas you were born with — your constitutional blueprint. 
+    Understanding your prakriti helps you make food, lifestyle, and treatment choices that keep you in optimal health. 
+    Most people have a primary dosha with a secondary influence.
+  </p>
+
+  <div class="card-grid">
+    <a href="{{ url_for('vata') }}" class="card reveal" style="background: rgba(255,255,255,.04); border-color: #C4825A;">
+      <div class="card-icon">🌬️</div>
+      <div class="card-name" style="font-family:'Cormorant Garamond',serif; font-size:2rem; color:var(--cream);">Vata</div>
+      <div style="font-size:2rem; color:var(--gold); opacity:.5; margin-bottom:.5rem; font-family:'Cormorant Garamond',serif; font-style:italic;">वात</div>
+      <div class="card-sub" style="color:var(--gold);">Space · Air</div>
+      <p class="card-desc" style="color:rgba(245,239,224,.6);">The energy of movement. Governs breathing, circulation, and all motion in the body.</p>
+      <div class="card-link" style="color:var(--clay);">Explore Vata →</div>
+    </a>
+
+    <a href="{{ url_for('pitta') }}" class="card reveal" style="background: rgba(255,255,255,.04); border-color: #D4A847;">
+      <div class="card-icon">🔥</div>
+      <div class="card-name" style="font-family:'Cormorant Garamond',serif; font-size:2rem; color:var(--cream);">Pitta</div>
+      <div style="font-size:2rem; color:var(--gold); opacity:.5; margin-bottom:.5rem; font-family:'Cormorant Garamond',serif; font-style:italic;">पित्त</div>
+      <div class="card-sub" style="color:var(--gold);">Fire · Water</div>
+      <p class="card-desc" style="color:rgba(245,239,224,.6);">The energy of transformation. Controls digestion, metabolism, and intelligence.</p>
+      <div class="card-link" style="color:var(--gold);">Explore Pitta →</div>
+    </a>
+
+    <a href="{{ url_for('kapha') }}" class="card reveal" style="background: rgba(255,255,255,.04); border-color: #7A8C6E;">
+      <div class="card-icon">🌊</div>
+      <div class="card-name" style="font-family:'Cormorant Garamond',serif; font-size:2rem; color:var(--cream);">Kapha</div>
+      <div style="font-size:2rem; color:var(--gold); opacity:.5; margin-bottom:.5rem; font-family:'Cormorant Garamond',serif; font-style:italic;">कफ</div>
+      <div class="card-sub" style="color:var(--gold);">Water · Earth</div>
+      <p class="card-desc" style="color:rgba(245,239,224,.6);">The energy of structure. Provides cohesion, lubrication, and the body's physical form.</p>
+      <div class="card-link" style="color:var(--sage);">Explore Kapha →</div>
+    </a>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">How to Identify</div>
+  <h2 class="section-title reveal">Finding your <em style="font-style:italic; color:var(--clay);">dominant dosha</em></h2>
+
+  <div style="display:grid; grid-template-columns: 1fr 1fr; gap:4rem; align-items:start;">
+    <div class="reveal">
+      <p style="line-height:1.9; margin-bottom:1.5rem; color:#5a4030;">
+        Your dosha is determined by physical characteristics, mental tendencies, and even the way you respond to stress. 
+        A trained Ayurvedic practitioner assesses prakriti through pulse diagnosis (nadi pariksha), physical examination, and detailed consultation.
+      </p>
+      <p style="line-height:1.9; margin-bottom:2rem; color:#5a4030;">
+        While online quizzes can offer a glimpse, a personal consultation gives a far more nuanced and accurate understanding of your unique nature.
+      </p>
+      <a href="{{ url_for('consult') }}" class="btn-primary">Book a Consultation</a>
+    </div>
+
+    <div class="reveal">
+      <div style="background:var(--mist); padding:2rem;">
+        <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.5rem; margin-bottom:1.5rem;">Quick indicators</h3>
+        <div style="margin-bottom:1.5rem;">
+          <div style="font-size:.72rem; letter-spacing:.15em; text-transform:uppercase; color:var(--clay); margin-bottom:.5rem;">Body Frame</div>
+          <p style="font-size:.9rem; line-height:1.7; color:#5a4030;">Vata: thin · Pitta: medium · Kapha: large</p>
+        </div>
+        <div style="margin-bottom:1.5rem;">
+          <div style="font-size:.72rem; letter-spacing:.15em; text-transform:uppercase; color:var(--clay); margin-bottom:.5rem;">Skin Type</div>
+          <p style="font-size:.9rem; line-height:1.7; color:#5a4030;">Vata: dry · Pitta: sensitive/oily · Kapha: thick/moist</p>
+        </div>
+        <div style="margin-bottom:1.5rem;">
+          <div style="font-size:.72rem; letter-spacing:.15em; text-transform:uppercase; color:var(--clay); margin-bottom:.5rem;">Mind Under Stress</div>
+          <p style="font-size:.9rem; line-height:1.7; color:#5a4030;">Vata: anxious · Pitta: irritable · Kapha: withdrawn</p>
+        </div>
+        <div>
+          <div style="font-size:.72rem; letter-spacing:.15em; text-transform:uppercase; color:var(--clay); margin-bottom:.5rem;">Digestion</div>
+          <p style="font-size:.9rem; line-height:1.7; color:#5a4030;">Vata: irregular · Pitta: strong · Kapha: slow</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

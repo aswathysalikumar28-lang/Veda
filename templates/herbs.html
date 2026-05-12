@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}Sacred Herbs — Veda Ayurveda{% endblock %}
+
+{% block content %}
+<div class="page-hero" data-bg="Herbs">
+  <div class="page-tag">Sacred Botanicals</div>
+  <h1 class="page-title">Nature's <em>Pharmacy</em></h1>
+  <p class="page-subtitle">Ayurveda has catalogued thousands of medicinal plants. These are among the most revered and widely used in classical Ayurvedic medicine.</p>
+</div>
+
+<section>
+  <div class="section-label">Materia Medica</div>
+  <h2 class="section-title reveal">Our <em style="font-style:italic; color:var(--clay);">herbal allies</em></h2>
+
+  <div class="card-grid">
+    {% for h in herbs %}
+    <div class="card reveal" style="border-left-color: var(--sage);">
+      <div style="font-size:2.5rem; margin-bottom:1rem;">{{ h.emoji }}</div>
+      <div class="card-name">{{ h.name }}</div>
+      <div style="font-size:.78rem; font-style:italic; color:var(--clay); margin-bottom:.4rem;">{{ h.latin }}</div>
+      <div class="card-sub" style="color:var(--sage);">{{ h.benefit }}</div>
+      <p class="card-desc">{{ h.desc }}</p>
+      <div style="margin-top:1.2rem;">
+        <span class="tag">{{ h.dosha }}</span>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section style="background:var(--sage); color:var(--cream);">
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center;">
+    <div class="reveal">
+      <div class="section-label" style="color:rgba(245,239,224,.7);">Our Philosophy</div>
+      <h2 style="font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,3.5vw,3rem); font-weight:300; line-height:1.2; margin-bottom:1.5rem;">Whole plants,<br><em style="font-style:italic;">whole healing</em></h2>
+      <p style="line-height:1.9; color:rgba(245,239,224,.8); margin-bottom:1.5rem;">
+        Unlike pharmaceutical drugs that isolate single active compounds, Ayurvedic herbalism uses whole plant preparations. The synergy between all constituents — known and unknown — creates a more complete and gentle healing effect.
+      </p>
+      <p style="line-height:1.9; color:rgba(245,239,224,.8);">
+        Our herbs are ethically sourced, organically grown where possible, and prepared according to classical Ayurvedic methods including sun processing, decoctions, and medicated ghees.
+      </p>
+    </div>
+    <div class="reveal">
+      <div style="background:rgba(255,255,255,.1); padding:2.5rem;">
+        <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.6rem; margin-bottom:1.5rem;">Common preparations</h3>
+        {% for prep in [('Churna', 'Herbal powder for internal use'), ('Kwatha', 'Herbal decoction or tea'), ('Ghrita', 'Medicated clarified butter'), ('Taila', 'Medicated herbal oil'), ('Avaleha', 'Herbal electuary or jam')] %}
+        <div style="border-bottom:1px solid rgba(245,239,224,.15); padding:.8rem 0; display:grid; grid-template-columns:1fr 2fr; gap:1rem;">
+          <span style="font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:rgba(245,239,224,.6);">{{ prep[0] }}</span>
+          <span style="font-size:.88rem; color:rgba(245,239,224,.8);">{{ prep[1] }}</span>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="text-align:center; background:var(--cream);">
+  <p style="font-size:.95rem; color:#5a4030; line-height:1.8; max-width:550px; margin:0 auto 2rem;">
+    Interested in a personalised herbal protocol? Our physicians can prescribe the right combination and form for your unique constitution.
+  </p>
+  <a href="{{ url_for('consult') }}" class="btn-primary">Get Herbal Guidance</a>
+</section>
+{% endblock %}
